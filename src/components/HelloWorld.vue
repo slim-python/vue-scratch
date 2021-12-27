@@ -1,58 +1,67 @@
 <template>
-  <div class="hello">
-    <h1>{{ msg }}</h1>
-    <p>
-      For a guide and recipes on how to configure / customize this project,<br>
-      check out the
-      <a href="https://cli.vuejs.org" target="_blank" rel="noopener">vue-cli documentation</a>.
-    </p>
-    <h3>Installed CLI Plugins</h3>
-    <ul>
-      <li><a href="https://github.com/vuejs/vue-cli/tree/dev/packages/%40vue/cli-plugin-babel" target="_blank" rel="noopener">babel</a></li>
-      <li><a href="https://github.com/vuejs/vue-cli/tree/dev/packages/%40vue/cli-plugin-eslint" target="_blank" rel="noopener">eslint</a></li>
-    </ul>
-    <h3>Essential Links</h3>
-    <ul>
-      <li><a href="https://vuejs.org" target="_blank" rel="noopener">Core Docs</a></li>
-      <li><a href="https://forum.vuejs.org" target="_blank" rel="noopener">Forum</a></li>
-      <li><a href="https://chat.vuejs.org" target="_blank" rel="noopener">Community Chat</a></li>
-      <li><a href="https://twitter.com/vuejs" target="_blank" rel="noopener">Twitter</a></li>
-      <li><a href="https://news.vuejs.org" target="_blank" rel="noopener">News</a></li>
-    </ul>
-    <h3>Ecosystem</h3>
-    <ul>
-      <li><a href="https://router.vuejs.org" target="_blank" rel="noopener">vue-router</a></li>
-      <li><a href="https://vuex.vuejs.org" target="_blank" rel="noopener">vuex</a></li>
-      <li><a href="https://github.com/vuejs/vue-devtools#vue-devtools" target="_blank" rel="noopener">vue-devtools</a></li>
-      <li><a href="https://vue-loader.vuejs.org" target="_blank" rel="noopener">vue-loader</a></li>
-      <li><a href="https://github.com/vuejs/awesome-vue" target="_blank" rel="noopener">awesome-vue</a></li>
-    </ul>
+  <div>
+    <scratch-card
+      :key="renderCount"
+      :cardWidth="cardWidth"
+      :cardHeight="cardHeight"
+      :finishPercent="finishPercent"
+      imageUrl="https://i.imgur.com/zdFRqJI.png"
+      :forceReveal="forceReveal"
+      @complete="onComplete"
+    >
+      <div class="tile-block w-48 h-48"></div>
+    </scratch-card>
   </div>
 </template>
 
 <script>
+import ScratchCard from "vue-scratchcard";
+// const onComplete = () => window.alert('Content revealed!');
+
 export default {
-  name: 'HelloWorld',
+  name: "HelloWorld",
+  components: {
+    ScratchCard
+  },
+  data() {
+    return {
+      cards: [
+        { score: "1" },
+        { score: "2" },
+        { score: "3" },
+        { score: "4" },
+        { score: "5" },
+        { score: "6" },
+        { score: "7" },
+        { score: "8" },
+        { score: "9" }
+      ],
+      renderCount: 0,
+      cardWidth: 140,
+      cardHeight: 140,
+      finishPercent: 100,
+      forceReveal: false
+    };
+  },
   props: {
     msg: String
+  },
+    methods: {
+    onComplete() {
+      // `this` will refer to the component instance
+      window.alert("Content revealed!");
+    }
   }
-}
+};
 </script>
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
-h3 {
-  margin: 40px 0 0;
-}
-ul {
-  list-style-type: none;
-  padding: 0;
-}
-li {
-  display: inline-block;
-  margin: 0 10px;
-}
-a {
-  color: #42b983;
+.tile-block {
+  background: url("https://i.imgur.com/0D63VBH.png");
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: center;
+  height: 140px;
 }
 </style>
